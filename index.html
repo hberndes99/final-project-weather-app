@@ -7,8 +7,11 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
         <link rel="stylesheet" href="src/style.css">
-
-    <title>weather app</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+        <title>weather app</title>
 </head>
 <body>
     <div class="container">
@@ -17,17 +20,20 @@
         
         <form id="city-input-form">
             <div class="row">
-            <div class="col">
+            <div class="col-4">
                 <input type="text" class="form-control" id="inputCity" placeholder="Please enter a city" />
             </div>
-            <div class="col">
-                <button class="searchButton">
+            <div class="col-2">
+                <button class="btn btn-primary searchButton">
                     <span class="iconify searchIcon" data-icon="ant-design:search-outlined" data-inline="false"
-                    style="color: rgb(255, 250, 250);"></span>
+                    style="color: rgb(0, 0, 0);"></span>
                 </button>
             </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary currentLocation" id="current-location-button">
+            <div class="col-2">
+
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary currentLocationButton" id="current-location-button">
                     Current location
                 </button>
             </div>
@@ -39,33 +45,38 @@
             London
         </h1>
         <h2>
-            Today | Saturday 15:31
+            Today  |  Saturday 15:31
         </h2>
+        <h3>
+            Gusts of wind
+        </h3>
 
         <div class="row currentWeatherBar">
-            <div class="col-6">
-                <span class="iconify" data-icon="mdi:weather-windy" data-inline="false"></span>
-
+            <div class="col-2">
+                <span class="iconify currentWeatherIcon" data-icon="ph:wind-thin" data-inline="false"></span></span>
             </div>
-
-            <div class="col-6">
-                15 °C | °F
+            <div class="col-6 currentTemperature">
+                15 <span class="units"> °C | °F </span>
+            </div>
+            <div class="col-4 weatherSpecifics">
                 <ul>
                     <li>
-                        humidity
+                        humidity 18%
                     </li>
                     <li>
-                        wind
+                        wind 12mph
                     </li>
                     <li>
-                        high
+                        high 15°C
                     </li>
                     <li>
-                        low
+                        low 4°C
                     </li>
                 </ul>
             </div>
+            
         </div>
+
 
         <div class="row forecastBar">
             <div class="col sectionOne">
@@ -73,7 +84,7 @@
                     18:00
                 </div>
                 <div class="weatherIcon">
-                    icon
+                    <span class="iconify forecast" data-icon="emojione-v1:sun-with-face" data-inline="false"></span>
                 </div>
                 <div class="forecastTemperature">
                     5°C
@@ -129,6 +140,8 @@
             </div>
             
         </div>
+
+        
 
 
     </div>
