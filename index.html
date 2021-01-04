@@ -9,8 +9,10 @@
         <link rel="stylesheet" href="src/style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <title>weather app</title>
 </head>
 <body>
@@ -56,7 +58,7 @@
                 <span class="iconify currentWeatherIcon" data-icon="ph:wind-thin" data-inline="false"></span></span>
             </div>
             <div class="col-6 currentTemperature">
-                15 <span class="units"> °C | °F </span>
+                <span id = "current-temperature">15</span> <span class="units"> °C | °F </span>
             </div>
             <div class="col-4 weatherSpecifics">
                 <div class="row">
@@ -64,7 +66,7 @@
                         Humidity:
                     </div>
                     <div class="col-2">
-                        18%
+                        <span id="humidity-value">18</span>%
                     </div>
                 </div>
                 <div class="row">
@@ -72,7 +74,7 @@
                         Wind:
                     </div>
                     <div class="col-2">
-                        12mph
+                        <span id="wind-speed-value">12</span>km/ph
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +82,7 @@
                         High:
                     </div>
                     <div class="col-2">
-                        15°C
+                        <span id="high">15</span><span>°C</span>
                     </div>
                 </div>
                 <div class="row">
@@ -88,7 +90,7 @@
                         Low:
                     </div>
                     <div class="col-2">
-                        3°C
+                        <span id="low">3</span><span>°C</span>
                     </div>
                 </div>
             </div>
