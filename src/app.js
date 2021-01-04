@@ -12,13 +12,12 @@ function getWeather(response) {
     let lowsOf = document.querySelector("#low");
     cityDisplay.innerHTML = (response.data.name);
     currentTemperatureDisplay.innerHTML = Math.round(response.data.main.temp);
-    weatherDescriptionDisplay.innerHTML = (response.data.weather.description);
+    weatherDescriptionDisplay.innerHTML = (response.data.weather[0].description);
     windDisplay.innerHTML = (Math.round(response.data.wind.speed));
     humidityDisplay.innerHTML = (response.data.main.humidity)
     highsOf.innerHTML = Math.round(response.data.main.temp_max);
     lowsOf.innerHTML = Math.round(response.data.main.temp_min);
 }
-
 
 
 axios.get(apiAddress).then(getWeather);
