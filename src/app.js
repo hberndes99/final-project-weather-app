@@ -1,5 +1,5 @@
 let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
-let city = `new york`
+let city = `london`
 let apiAddress = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 function getWeather(response) {
@@ -10,6 +10,9 @@ function getWeather(response) {
     let humidityDisplay = document.querySelector("#humidity-value");
     let highsOf = document.querySelector("#high");
     let lowsOf = document.querySelector("#low");
+    let iconId = (response.data.weather[0].icon);
+    let weatherIconUrl = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
+    let currentWeatherIconDisplay = document.querySelector("#current-weather-icon");
     cityDisplay.innerHTML = (response.data.name);
     currentTemperatureDisplay.innerHTML = Math.round(response.data.main.temp);
     weatherDescriptionDisplay.innerHTML = (response.data.weather[0].description);
@@ -17,6 +20,7 @@ function getWeather(response) {
     humidityDisplay.innerHTML = (response.data.main.humidity)
     highsOf.innerHTML = Math.round(response.data.main.temp_max);
     lowsOf.innerHTML = Math.round(response.data.main.temp_min);
+    currentWeatherIconDisplay.src = weatherIconUrl;
 }
 
 
