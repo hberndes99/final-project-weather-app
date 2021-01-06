@@ -39,17 +39,30 @@ function getWeather(response) {
     dateDisplay.innerHTML = getDate(response.data.dt *1000);
 }
 
-function getCity(event) {
-    event.preventDefault();
-    let input = document.querySelector("#input-city");
-    let city = input.value;
+function getLocation(event) {
+event.preventDefault();
+    navigator.geolocation.getCurrentPosition
+}
+
+function search(city) {
     let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
     let apiAddress = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     axios.get(apiAddress).then(getWeather);
 }
 
+function getCity(event) {
+    event.preventDefault();
+    let input = document.querySelector("#input-city");
+    let city = input.value;
+    search(city);
+    if (city.length = 0) {
+        getLocation()
+    }
+}
 
 let searchForm = document.querySelector("#city-input-form");
 searchForm.addEventListener("submit", getCity);
 
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", getLocation);
 
