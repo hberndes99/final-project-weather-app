@@ -1,6 +1,4 @@
-let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
-let city = `london`
-let apiAddress = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
 
 function getDate(timestamp) {
     let currentDate = new Date(timestamp);
@@ -41,5 +39,17 @@ function getWeather(response) {
     dateDisplay.innerHTML = getDate(response.data.dt *1000);
 }
 
+function getCity(event) {
+    event.preventDefault();
+    let input = document.querySelector("#input-city");
+    let city = input.value;
+    let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
+    let apiAddress = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    axios.get(apiAddress).then(getWeather);
+}
 
-axios.get(apiAddress).then(getWeather);
+
+let searchForm = document.querySelector("#city-input-form");
+searchForm.addEventListener("submit", getCity);
+
+
