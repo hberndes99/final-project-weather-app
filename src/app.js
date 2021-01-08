@@ -27,6 +27,9 @@ function getWeather(response) {
     let weatherIconUrl = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
     let currentWeatherIconDisplay = document.querySelector("#current-weather-icon");
     let dateDisplay = document.querySelector("#date");
+
+    currentCelciusTemp = response.data.main.temp;
+
     cityDisplay.innerHTML = (response.data.name);
     currentTemperatureDisplay.innerHTML = Math.round(response.data.main.temp);
     weatherDescriptionDisplay.innerHTML = (response.data.weather[0].description);
@@ -40,7 +43,6 @@ function getWeather(response) {
 }
 
 function searchForLocation(location) {
-    location.preventDefault();
     let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
     let apiAddress = `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&units=metric&appid=${apiKey}`
     axios.get(apiAddress).then(getWeather);
@@ -67,7 +69,22 @@ function getCity(event) {
     }
 }
 
+function convertToFahrenheit(temp) {
+    temp.preventDefault();
+    let currentTemperatureDisplay = document.querySelector("#current-temperature");
+    currentTemperatureDisplay.innerHTML = Math.round((currentCelciusTemp * 9/5) + 32);
+}
 
+function convertToCelcius(temp) {
+    temp.preventDefault();
+    let currentTemperatureDisplay = document.querySelector("#current-temperature");
+    currentTemperatureDisplay.innerHTML = Math.round(currentCelciusTemp);
+
+}
+
+let currentCelciusTemp = null;
+
+search(`London`);
 
 let searchForm = document.querySelector("#city-input-form");
 searchForm.addEventListener("submit", getCity);
@@ -75,4 +92,10 @@ searchForm.addEventListener("submit", getCity);
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getLocation);
 
-search(`London`);
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", convertToFahrenheit);
+
+let celcius = document.querySelector("#celcius-link");
+celcius.addEventListener("click", convertToCelcius);
+
+
