@@ -29,6 +29,8 @@ function getWeather(response) {
     let dateDisplay = document.querySelector("#date");
 
     currentCelciusTemp = response.data.main.temp;
+    highsOfTemp = response.data.main.temp_max;
+    lowsOfTemp = response.data.main.temp_min;
 
     cityDisplay.innerHTML = (response.data.name);
     currentTemperatureDisplay.innerHTML = Math.round(response.data.main.temp);
@@ -73,16 +75,31 @@ function convertToFahrenheit(temp) {
     temp.preventDefault();
     let currentTemperatureDisplay = document.querySelector("#current-temperature");
     currentTemperatureDisplay.innerHTML = Math.round((currentCelciusTemp * 9/5) + 32);
+    let highsOf = document.querySelector("#high");
+    let lowsOf = document.querySelector("#low");
+    highsOf.innerHTML = Math.round((highsOfTemp * 9/5) + 32);
+    lowsOf.innerHTML = Math.round((lowsOfTemp * 9/5) + 32);
+
+
+    celcius.classList.remove("active");
+    fahrenheit.classList.add("active");
 }
 
 function convertToCelcius(temp) {
     temp.preventDefault();
     let currentTemperatureDisplay = document.querySelector("#current-temperature");
     currentTemperatureDisplay.innerHTML = Math.round(currentCelciusTemp);
-
+    let highsOf = document.querySelector("#high");
+    let lowsOf = document.querySelector("#low");
+    highsOf.innerHTML = Math.round(highsOfTemp);
+    lowsOf.innerHTML = Math.round(lowsOfTemp);
+    celcius.classList.add("active");
+    fahrenheit.classList.remove("active");
 }
 
 let currentCelciusTemp = null;
+let highsOfTemp = null;
+let lowsOfTemp = null;
 
 search(`London`);
 

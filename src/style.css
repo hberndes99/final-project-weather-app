@@ -61,6 +61,16 @@ h3::first-letter {
   vertical-align: text-top;
 }
 
+.active {
+  text-decoration: none;
+  color: #000000;
+}
+
+.active:hover {
+  cursor: default;
+  color: #000000;
+}
+
 .weatherSpecifics {
   font-size: 13px;
   text-align: left;
