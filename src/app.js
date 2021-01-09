@@ -15,6 +15,15 @@ function getDate(timestamp) {
     return `${day}  ${hours}:${minutes}`
 }
 
+function formatHours(timestamp) {
+    let forecastDate = new Date(timestamp);
+    let hours = forecastDate.getHours();
+    if (hours < 10) {
+        hours = `0${hours}`
+    }
+    return `${hours}:00`
+}
+
 function getWeather(response) {
     let cityDisplay = document.querySelector("h1");
     let currentTemperatureDisplay = document.querySelector("#current-temperature");
@@ -44,6 +53,29 @@ function getWeather(response) {
     dateDisplay.innerHTML = getDate(response.data.dt *1000);
 }
 
+function getForecast(response) {
+    forecastSection = document.querySelector("#forecast-section");
+    forecastSection.innerHTML = null;
+    let forecast = null;
+    for (let index = 0; index < 5; index++) {
+        forecast = response.data.list[index];
+        forecastSection.innerHTML += 
+    `<div class="row forecastBar">
+            <div class="col-2" id="forecast-section">
+                <div class="time">
+                    ${formatHours(forecast.dt *1000)}
+                </div>
+                <div class="weatherIcon">
+                    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
+                </div>
+                <div class="forecastTemperature">
+                    ${Math.round(forecast.main.temp)}°C
+                </div>
+            </div>
+    </div>`
+    }
+}
+
 function searchForLocation(location) {
     let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
     let apiAddress = `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&units=metric&appid=${apiKey}`
@@ -59,6 +91,9 @@ function search(city) {
     let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
     let apiAddress = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     axios.get(apiAddress).then(getWeather);
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(getForecast);
 }
 
 function getCity(event) {
@@ -79,7 +114,6 @@ function convertToFahrenheit(temp) {
     let lowsOf = document.querySelector("#low");
     highsOf.innerHTML = Math.round((highsOfTemp * 9/5) + 32);
     lowsOf.innerHTML = Math.round((lowsOfTemp * 9/5) + 32);
-
 
     celcius.classList.remove("active");
     fahrenheit.classList.add("active");
