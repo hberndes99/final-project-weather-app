@@ -60,8 +60,8 @@ function getForecast(response) {
     for (let index = 0; index < 5; index++) {
         forecast = response.data.list[index];
         forecastSection.innerHTML += 
-    `<div class="row forecastBar">
-            <div class="col-2" id="forecast-section">
+    `<div class="row forecastBar" id="forecast-section">
+            <div class="col-2" >
                 <div class="time">
                     ${formatHours(forecast.dt *1000)}
                 </div>
@@ -69,10 +69,11 @@ function getForecast(response) {
                     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
                 </div>
                 <div class="forecastTemperature">
-                    ${Math.round(forecast.main.temp)}°C
+                    ${Math.round(forecast.main.temp)}°
                 </div>
             </div>
-    </div>`
+    </div>
+    `
     }
 }
 
@@ -80,6 +81,9 @@ function searchForLocation(location) {
     let apiKey = `4934aa3a2a7bd013332e7d59c0e551f4`;
     let apiAddress = `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&units=metric&appid=${apiKey}`
     axios.get(apiAddress).then(getWeather);
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${apiKey}&units=metric`
+    axios.get(apiUrl).then(getForecast);
 }
 
 function getLocation(event) {
