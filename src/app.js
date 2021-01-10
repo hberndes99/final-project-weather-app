@@ -67,11 +67,11 @@ function getForecast(response) {
                 <div class="time">
                     ${formatHours(forecast.dt *1000)}
                 </div>
-                <div class="weatherIcon">
-                    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
+                <div >
+                    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="" class="weatherIcon">
                 </div>
-                <div class="forecastTemperature" id="forecast-temperature">
-                    ${forecastTemp}°
+                <div>
+                    <span class="forecastTemperature">${forecastTemp}</span>°
                 </div>
             </div>
     
@@ -107,7 +107,7 @@ function getCity(event) {
     let input = document.querySelector("#input-city");
     let city = input.value;
     search(city);
-    if (city.length = 0) {
+    if (city.length === 0) {
         getLocation()
     }
 }
@@ -125,9 +125,12 @@ function convertToFahrenheit(temp) {
     let lowsOf = document.querySelector("#low");
     highsOf.innerHTML = Math.round((highsOfTemp * 9/5) + 32);
     lowsOf.innerHTML = Math.round((lowsOfTemp * 9/5) + 32);
-    let forecastTempDisplay = document.querySelectorAll("#forecast-temperature");
-    forecastTempDisplay.forEach(convertToF); 
     
+    let forecastTempDisplay = document.querySelectorAll(".forecastTemperature");
+    forecastTempDisplay.forEach(function(forecast) {
+         let currentTemp = forecast.innerHTML;
+         forecast.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+    });
 
     celcius.classList.remove("active");
     fahrenheit.classList.add("active");
@@ -141,8 +144,15 @@ function convertToCelcius(temp) {
     let lowsOf = document.querySelector("#low");
     highsOf.innerHTML = Math.round(highsOfTemp);
     lowsOf.innerHTML = Math.round(lowsOfTemp);
+    
     celcius.classList.add("active");
     fahrenheit.classList.remove("active");
+
+    let forecastTempDisplay = document.querySelectorAll(".forecastTemperature");
+    forecastTempDisplay.forEach(function (forecast) {
+    let currentTemp = forecast.innerHTML;
+    forecast.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
 }
 
 let currentCelciusTemp = null;
