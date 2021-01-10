@@ -1,6 +1,7 @@
 .page {
   margin: 50px auto 10px;
   max-width: 650px;
+  min-width: 580px;
 }
 
 .weatherApp {
