@@ -60,7 +60,7 @@ function getForecast(response) {
     for (let index = 0; index < 5; index++) {
         forecast = response.data.list[index];
         forecastSection.innerHTML += 
-    `<div class="row forecastBar" id="forecast-section">
+    `
             <div class="col-2" >
                 <div class="time">
                     ${formatHours(forecast.dt *1000)}
@@ -72,7 +72,7 @@ function getForecast(response) {
                     ${Math.round(forecast.main.temp)}°
                 </div>
             </div>
-    </div>
+    
     `
     }
 }
