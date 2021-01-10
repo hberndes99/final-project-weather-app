@@ -87,12 +87,11 @@ h3::first-letter {
 .forecastBar {
   color: rgba(0, 0, 0, 0.8);
   font-size: 13px;
-  text-align: center;
   margin: 0 auto;
 }
 
 .weatherIcon {
-  width: 20px;
+  width: 100%;
 }
 
 .footer {

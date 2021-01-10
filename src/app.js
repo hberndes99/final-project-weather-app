@@ -63,7 +63,7 @@ function getForecast(response) {
         forecastTemp = Math.round(forecast.main.temp)
         forecastSection.innerHTML += 
     `
-            <div class="col-2 forecastBar" >
+            <div class="col-2 text-center forecastBar" >
                 <div class="time">
                     ${formatHours(forecast.dt *1000)}
                 </div>
@@ -112,6 +112,11 @@ function getCity(event) {
     }
 }
 
+function convertToF() {
+        let forecastTempDisplay = document.querySelectorAll("#forecast-temperature");
+        forecastTempDisplay.innerHTML = Math.round((forecastTempDisplay * 9/5) + 32);
+    }
+
 function convertToFahrenheit(temp) {
     temp.preventDefault();
     let currentTemperatureDisplay = document.querySelector("#current-temperature");
@@ -120,8 +125,9 @@ function convertToFahrenheit(temp) {
     let lowsOf = document.querySelector("#low");
     highsOf.innerHTML = Math.round((highsOfTemp * 9/5) + 32);
     lowsOf.innerHTML = Math.round((lowsOfTemp * 9/5) + 32);
-    let forecastTempDisplay = document.querySelector("#forecast-temperature");
-    forecastTempDisplay = Math.round((forecastTempDisplay * 9/5) + 32);
+    let forecastTempDisplay = document.querySelectorAll("#forecast-temperature");
+    forecastTempDisplay.forEach(convertToF); 
+    
 
     celcius.classList.remove("active");
     fahrenheit.classList.add("active");
