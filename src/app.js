@@ -57,19 +57,21 @@ function getForecast(response) {
     forecastSection = document.querySelector("#forecast-section");
     forecastSection.innerHTML = null;
     let forecast = null;
+    let forecastTemperature = null;
     for (let index = 0; index < 5; index++) {
         forecast = response.data.list[index];
+        forecastTemp = Math.round(forecast.main.temp)
         forecastSection.innerHTML += 
     `
-            <div class="col-2" >
+            <div class="col-2 forecastBar" >
                 <div class="time">
                     ${formatHours(forecast.dt *1000)}
                 </div>
                 <div class="weatherIcon">
                     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="">
                 </div>
-                <div class="forecastTemperature">
-                    ${Math.round(forecast.main.temp)}°
+                <div class="forecastTemperature" id="forecast-temperature">
+                    ${forecastTemp}°
                 </div>
             </div>
     
@@ -118,6 +120,8 @@ function convertToFahrenheit(temp) {
     let lowsOf = document.querySelector("#low");
     highsOf.innerHTML = Math.round((highsOfTemp * 9/5) + 32);
     lowsOf.innerHTML = Math.round((lowsOfTemp * 9/5) + 32);
+    let forecastTempDisplay = document.querySelector("#forecast-temperature");
+    forecastTempDisplay = Math.round((forecastTempDisplay * 9/5) + 32);
 
     celcius.classList.remove("active");
     fahrenheit.classList.add("active");
